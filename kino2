@@ -1,0 +1,38 @@
+#!/bin/bash
+clear
+#curl http://www.ippasos.gr/kliroseisSimple/ > KinoFile
+clear
+PS3='Please enter your choice: '
+options=("Option 1" "Option 2" "Option 3" "Option 4" "Option 5"  "Quit")
+select opt in "${options[@]}"
+do
+    case $opt in
+        "Option 1")
+            echo "2 teleutes kliroseis"
+            #sed -n -e '206,334p' KinoFile
+ 	    sed -n -e '209,228p' KinoFile | awk '{print $1}' | sed 's/<td>//'| sed 's/<\/td>//' > k1
+	    sed -n -e '235,254p' KinoFile | awk '{print $1}' | sed 's/<td>//'| sed 's/<\/td>//' >> k1 
+	    for ((i=1;i<=80;i++)); 
+	    do
+		cat k1 | grep ^'i.'
+
+	    done
+	    ;;
+        "Option 2")
+            echo "you chose choice 2"
+            ;;
+        "Option 3")
+            echo "you chose choice $REPLY which is $opt"
+            ;;
+        "Option 4")
+            echo "you chose choice $REPLY which is $opt"
+            ;;
+        "Option 5")
+            echo "you chose choice $REPLY which is $opt"
+            ;;
+        "Quit")
+            break
+            ;;
+        *) echo "invalid option $REPLY";;
+    esac
+done

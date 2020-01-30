@@ -1,0 +1,41 @@
+#!/bin/bash
+clear
+#curl http://www.ippasos.gr/kliroseisSimple/ > KinoFile
+clear
+cat KinoFile | grep 'tr id="draw' | wc -l #emfanizei ths kliroseis
+echo "dose px 2-5 teleutes kliroseis:"
+read n
+cat KinoFile | grep 'tr id="draw'| tail -n $n > kliroseis #emfanizei kliroseis n
+cat kliroseis # emfanizei to arxeio
+echo "---------"
+cat kliroseis | awk -F"\"" '{print $2}' > kliroseis #prenei mono to id
+cat kliroseis
+echo "-----------"
+
+
+
+cat kliroseis |tail -n 1 > k1   #bazei to id ths 1 se sto arxeio k1
+read k1 < k1 #diabazei to arxeio se 1 metablith
+echo "k1:" $k1
+
+cat kliroseis |tail -n 2 > k2   #bazei to id ths 1 se sto arxeio k1
+read k2 < k2 #diabazei to arxeio se 1 metablith
+echo "k2:" $k2
+
+cat kliroseis |tail -n 3 > k3   #bazei to id ths 1 se sto arxeio k1
+read k3 < k3 #diabazei to arxeio se 1 metablith
+echo "k3:" $k3
+
+cat kliroseis |tail -n 4 > k4   #bazei to id ths 1 se sto arxeio k1
+read k4 < k4 #diabazei to arxeio se 1 metablith
+echo "k4:" $k4
+
+cat kliroseis |tail -n 5 > k5   #bazei to id ths 1 se sto arxeio k1
+read k5 < k5 #diabazei to arxeio se 1 metablith
+echo "k5:" $k5
+rm k1 k2 k3 k4 k5
+
+#cat KinoFile | grep $k1 # 9elw ths epomenes 22 grames
+#sed -n -e '206,334p' KinoFile # 5 tetia me 22 grames diafora se auto to orio !
+#awk '/$k1/ {for(i=1; i<=5; i++) {getline; print}}' KinoFile
+sed -n -e '$k1 ,+7p' KinoFile
